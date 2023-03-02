@@ -1,0 +1,39 @@
+.Main{
+    width: 100vw;
+    height: 90vh;
+}
+
+.AnswerGrid{
+    display: grid;
+    grid-template-rows: repeat(6,1fr);
+    grid-gap: 10px;
+    margin: 0px;
+    padding: 0px;
+    background-color: #fff;
+    justify-content: center;
+    margin: auto;
+    margin-top: 2vh;
+    width: 370px;
+    height: 420px;
+    box-sizing: border-box;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    width: 370px;
+    height: 62.5px;
+    
+}
+.AnswerBox{
+    display: flex;
+    flex-direction: row;
+    width: 62px;
+    height: 62.5px;
+    border:2px solid #d3d6da;
+    margin: 4px;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000000;
+}
