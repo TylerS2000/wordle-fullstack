@@ -7,15 +7,15 @@ import React, { useEffect } from "react";
 import words from "../Helpers/words.json";
 import io from "socket.io-client";
 const socket = io();
-export default function Main(props: {mode: string}) {
+export default function Main(){
     const [isConnected, setIsConnected] = React.useState(socket.connected);
     useEffect(() => {
-        console.log("connected");
         socket.on("connect", () => {
             setIsConnected(true);
-            console.log("connected");
-            
         });
+        socket.on("joined",(msg)=>{
+            console.log(msg);
+        })
         socket.on("disconnect", () => {
             setIsConnected(false);
         });
@@ -59,9 +59,9 @@ export default function Main(props: {mode: string}) {
     //useEffect causes answer array to update with answer input
     return (
     <div className="Main">
+    <button onClick={()=>socket.emit("join","1")}>Join!</button>
         <div>{win||row===6?<WinPopup answer={correctAnswer} win={win}/>:""}</div>
         <div className="AnswerGrid">
-            
             <Row answer={answers[0]} row={0} current={row} correctAnswer={correctAnswer} win={win} setWin={setWin}/>
             <Row answer={answers[1]} row={1} current={row} correctAnswer={correctAnswer} win={win} setWin={setWin}/>
             <Row answer={answers[2]} row={2} current={row} correctAnswer={correctAnswer} win={win} setWin={setWin}/>

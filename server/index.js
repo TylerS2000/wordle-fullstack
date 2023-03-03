@@ -7,7 +7,11 @@ const io = new Server(server);
 const port = process.env.PORT || 3001;
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    socket.on("join",(roomNumber)=>{
+        socket.join(roomNumber);
+        io.to(roomNumber).emit('joined','hello')
+    })
+ 
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
