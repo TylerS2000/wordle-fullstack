@@ -11,7 +11,6 @@ export default function Keyboard(props: { guess: string, correctAnswer: string, 
     const rowTwoArr = rowTwo.split('')
     const rowThree = "Backspace Z X C V B N M Enter"
     const rowThreeArr = rowThree.split(' ')
-    console.log(checkedLetters);
     
     function checkLetter(letter: string) {
         if (props.correctAnswer.includes(letter) && props.guess.includes(letter) && checkedLetters[letter].guessed === false && props.correctAnswer.indexOf(letter) === props.guess.indexOf(letter)) {
@@ -60,13 +59,13 @@ export default function Keyboard(props: { guess: string, correctAnswer: string, 
     }
     return <div className='keyboardWrapper'>
         <div className='rowOne'>
-            {rowOneArr.map(letter => { checkLetter(letter); return (<button onClick={() => handleClick(letter)} className={styleLetters(letter)}>{letter}</button>) })}
+            {rowOneArr.map(letter => { checkLetter(letter); return (<button key={letter} onClick={() => handleClick(letter)} className={styleLetters(letter)}>{letter}</button>) })}
         </div>
         <div className='rowTwo'>
-            {rowTwoArr.map(letter => { checkLetter(letter); return (<button onClick={() => handleClick(letter)} className={styleLetters(letter)}>{letter}</button>) })}
+            {rowTwoArr.map(letter => { checkLetter(letter); return (<button key ={letter} onClick={() => handleClick(letter)} className={styleLetters(letter)}>{letter}</button>) })}
         </div>
         <div className='rowThree'>
-            {rowThreeArr.map(letter => { checkLetter(letter); return (<button onClick={() => handleClick(letter)} className={(letter.length > 1 ? 'action ' : styleLetters(letter))}>{letter}</button>) })}
+            {rowThreeArr.map(letter => { checkLetter(letter); return (<button key={letter} onClick={() => handleClick(letter)} className={(letter.length > 1 ? 'action ' : styleLetters(letter))}>{letter}</button>) })}
         </div>
     </div>
 }

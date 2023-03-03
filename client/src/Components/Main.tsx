@@ -29,7 +29,7 @@ export default function Main() {
             }
         }:onkeydown=null 
         //if win is false allow typing, if it is true don't allow typing
-            console.log(words.includes(answer))
+        
     React.useEffect(() => {
         setAnswers((prev)=>{
             let newAnswers = [...prev];
