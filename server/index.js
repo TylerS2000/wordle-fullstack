@@ -8,7 +8,12 @@ const port = process.env.PORT || 3001;
 
 io.on('connection', (socket) => {
     console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
 });
+
+
 
 server.listen(port, () => {
     console.log(`Server is listening on port ${port}`);

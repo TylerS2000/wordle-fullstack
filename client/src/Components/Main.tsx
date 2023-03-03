@@ -3,9 +3,28 @@ import Row from "./Row";
 import WinPopup from "./WinPopup";
 import answerGenerator from "../Helpers/answerGenerator";
 import Keyboard from "./Keyboard";
-import React from "react";
+import React, { useEffect } from "react";
 import words from "../Helpers/words.json";
-export default function Main() {
+import io from "socket.io-client";
+const socket = io();
+export default function Main(props: {mode: string}) {
+    const [isConnected, setIsConnected] = React.useState(socket.connected);
+    useEffect(() => {
+        console.log("connected");
+        socket.on("connect", () => {
+            setIsConnected(true);
+            console.log("connected");
+            
+        });
+        socket.on("disconnect", () => {
+            setIsConnected(false);
+        });
+        return () => {
+            socket.off("connect");
+            socket.off("disconnect");
+        };
+    }, []);
+
     const [answer, setAnswer] = React.useState("");
     const [row, setRow] = React.useState(0);
     const [answers, setAnswers] = React.useState(["","","","","",""]);
@@ -29,7 +48,7 @@ export default function Main() {
             }
         }:onkeydown=null 
         //if win is false allow typing, if it is true don't allow typing
-        
+
     React.useEffect(() => {
         setAnswers((prev)=>{
             let newAnswers = [...prev];
